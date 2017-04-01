@@ -700,6 +700,203 @@ keyword=长楹天街&shopid=200&channel=0
 |returntype||int|Y|0:成功;1:失败|
 |subtotal||string|Y|小计|
 |otherbilling||array|Y|其它计费|
+***
+#1.2第二版新增接口
+***
+## 接口名称
+    获取取消订单原因集合
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/reasons?shopid=&channel=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 获取外卖订单的拒绝原因列表
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "reasons": [
+            {
+                "title": "商品已售完",
+                "reasonsid": "100"
+            },
+            {
+                "title": "商家代金券",
+                "reasonsid": "101"
+            },
+            {
+                "title": "联系不上客户",
+                "reasonsid": "102"
+            },
+            {
+                "title": "重复订单",
+                "reasonsid": "103"
+            }, 
+            {
+                "title": "其他",
+                "reasonsid": "104"
+            }
+        ]
+    }
+}
+
+```
+
+
+### 6) 请求返回结果参数说明:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|title|拒绝标题|string|Y|-|
+|reasonsid|拒绝编号|string|Y|-|
+***
+## 接口名称
+    拒绝订单接口
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/confirmreason?shopid=&channel=&orderid=&reasonsid=
+&reason=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 拒绝外卖订单
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+|orderid||string|Y|订单编号|
+|reasonsid||string|Y|拒绝原因code|
+|reason||string|Y|拒绝原因|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
+
+##  获取店铺的营业状态信息
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/states?shopid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 获取指定店铺的各个渠道的开店状态信息
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid|店铺编号|NSString|Y| 店铺编号|
+
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,              
+    "result":{
+     	  "channels"[
+     	   {
+     		 "channel":1,
+     		 "channelname":"京东",
+     		 "state":0
+     	   },
+     	   {
+     		 "channel":1,
+     		 "channelname":"美团"
+     		  "state":0,
+     	   },
+     	    {
+     		 "channel":2,
+     		 "channelname":"饿了吗",
+     		  "state":0
+     	   }
+     	]
+    }
+}
+```
+
+
+### 6) 请求返回结果参数说明:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|channelname|渠道名称|string|Y|京东、饿了吗、美团等|
+|channe|渠道编号|Number|Y|-|
+|state|开店状态|Number|Y|1:开店中0：闭店|
+***
+
+
+##  修改店铺的营业状态信息
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/modifystate?shopid=&channel=&state=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 修改指定店铺指定渠道的营业状态
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid|店铺编号|NSString|Y| 店铺编号|
+|channel渠道编号|NSString|Y| 渠道编号|
+|state|店铺状态|NSString|Y| 1:开店中0：闭店|
+
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+```
+
+
+
 
 
 
