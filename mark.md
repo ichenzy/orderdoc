@@ -700,9 +700,8 @@ keyword=长楹天街&shopid=200&channel=0
 |returntype||int|Y|0:成功;1:失败|
 |subtotal||string|Y|小计|
 |otherbilling||array|Y|其它计费|
-***
+
 #1.2第二版新增接口
-***
 ## 接口名称
     获取取消订单原因集合
 
