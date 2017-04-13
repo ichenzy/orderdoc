@@ -617,3 +617,255 @@
 
 ```
 
+***
+## 接口名称
+ *   用户发起的 同意取消订单接口
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/usercancelorderaccess?shopid=&channel=&orderid=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 同意用户发起的取消订单接口
+
+### 4) 请求参数:
+
+#### POST参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+|orderid||string|Y|订单编号|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
+
+***
+## 接口名称
+ *   商品管理获取商品二级分类列表
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/goodstypelist?shopid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 商品管理获取商品分类列表
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "types": [
+            {
+                "parentid": "2001",
+                "parentname": "水果",
+                "childs": [
+                    {
+                        "childid": "2001010",
+                        "childname": "进口水果"
+                    },
+                    {
+                        "childid": "2001011",
+                        "childname": "有机水果"
+                    }
+                ]
+            },
+            {
+                "parentid": "2010",
+                "parentname": "常温日配",
+                "childs": [
+                    {
+                        "childid": "2010001",
+                        "childname": "鲜奶"
+                    },
+                    {
+                        "childid": "2010002",
+                        "childname": "酸奶"
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+```
+### 6) 请求返回结果参数说明:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|parentid|一级分类编号|string|Y|-|
+|parentname|一级分类名称|string|Y|-|
+|childid|二级分类编号|string|Y|-|
+|childname|二级分类名称|string|Y|-|
+
+***
+## 接口名称
+ *  获取二级分类下的商品
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/goodslist?shopid=&parentid=&childid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 商品管理获取商品分类列表
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|parentid|一级分类编号|string|Y|-|
+|childid|二级分类编号|string|Y|-|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "types": [
+            {
+                "goodsid": "1000012",
+                "goodsname": "红牛"
+            },
+            {
+                "goodsid": "1000013",
+                "goodsname": "脉动"
+            },
+            {
+                "goodsid": "1000014",
+                "goodsname": "尖叫"
+            }
+        ]
+    }
+}
+```
+### 6) 请求返回结果参数说明:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|goodsid|商品的线下编号|string|Y|-|
+|goodsname|商品的线下名称|string|Y|-|
+
+***
+## 接口名称
+ *  获取商品的上下架状态信息
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/goodsstates?goodsid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 商品管理获取商品分类列表
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|goodsid||string|Y|商品的线下编号|
+
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "states": [
+            {
+                "channel": "0",
+                "channelname": "美团",
+                "state": 0
+            },
+            {
+                "channel": "1",
+                "channelname": "京东",
+                "state": 0
+            },
+            {
+                "channel": "0",
+                "channelname": "饿了吗",
+                "state": 1
+            }
+        ]
+    }
+}
+```
+### 6) 请求返回结果参数说明:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|channel|渠道编号|string|Y|-|
+|channelname|渠道名称|string|Y|-|
+|state|商品的状态|string|Y|0:下架 1：上架|
+***
+## 接口名称
+ *   修改商品的上下架信息
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/store/modifygoodsstate?goodsid=&channels=&state=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 修改商品在指定渠道的上下架状态
+
+### 4) 请求参数:
+
+#### POST参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|goodsid||string|Y|商品的线下编号|
+|channels||string|Y|渠道编号数组|
+|state|商品的状态|string|Y|0:下架 1：上架|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
+
+***
+
