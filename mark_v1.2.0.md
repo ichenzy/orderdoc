@@ -27,6 +27,7 @@
     "success": true,
     "returntype": 0,
     "result": {
+    	"hint":"提示:请与客户沟通一致后取消订单",
         "reasons": [
             {
                 "title": "商品已售完",
@@ -83,8 +84,8 @@
 |shopid||string|Y|店铺id|
 |channel||string|Y|渠道编号|
 |orderid||string|Y|订单编号|
-|reasonsid||string|Y|拒绝原因code|
-|reason||string|Y|拒绝原因|
+|reasonsid||string|Y|取消原因code|
+|reason||string|Y|取消原因|
 
 ### 5) 请求返回结果:
 
@@ -445,4 +446,174 @@
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
 |ordernote|订单备注|string|Y|-|
 |iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
+
+***
+##  获取售后管理订单接口
+
+### 1) 请求地址
+
+>http://xloms.com/index.php?action=salesorderlist&channel=0&pagesize=10&pageindex=0&state=0&shopid=200
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 获取未处理、已处理的售后订单
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|channel|订单的渠道来源|Number|Y|0:全部 1:京东 2:美团 |
+|pagesize|分页的页块大小|Number|Y|默认大小10|
+|pageindex|分页的页码|Number|Y|从0开始|
+|state|订单的状态|Number|Y|0:未处理 1:已处理|
+|shopid|店铺的编号|Number|Y|-|
+
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,              
+    "result":{
+      "orders": [
+      	{
+          "customeritems": {
+           	 "customername": "张女士",
+             "customermobile": "138123456789",
+             "customeraddress": "大西洋新城A1011"
+          },
+          "reasons":[
+          	{
+          		"reason":"用户申请取消订单",
+          		"datetime":"于2017-4-8 14:15"
+          	},
+          	{
+          		"reason":"商家已同意取消订单",
+          		"datetime":"于2017-4-8 14:20"
+          	}
+          ]
+         "systemreason":"15：00内未处理，将自动取消订单"，
+         "ordernote":"多加辣椒",
+    	 "iscancelorder":0,
+         "ordernum":"#1",
+         "orderid":"2890380489499",
+         "channelname":"美团",
+         "channe":0,
+         "ordertime":"2017-3-1 15:30",
+         "shoppaytotal":"¥75.61",
+         "statemessage":"骑手未接单",
+         "ridername":"",
+         "riderphone":"",
+         "deliverytime":"2017-7-20 15:30"
+      	},
+       	{
+         "customeritems": {
+            "customername": "张女士",
+            "customermobile": "138123456789",
+            "customeraddress": "大西洋新城A1011"
+         },
+         "ordernote":"多加辣椒",
+    	 "iscancelorder":0,
+         "ordernum":"#1",
+         "orderid":"2890380489499",
+         "channelname":"美团",
+         "channe":0,
+         "ordertime":"2017-3-1 15:30",
+         "shoppaytotal":"¥75.61",
+         "statemessage":"骑手已接单",
+         "ridername":"张三",
+         "riderphone":"18778789999"
+       }
+      ]
+       "hasmore":false,
+    }
+}
+```
+
+
+### 6) 请求返回结果参数说明新增）:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|ordernote|订单备注|string|Y|-|
+|iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
+|reason|状态提示|string|Y|-|
+|datetime|状态变更时间|string|Y|0:不允许 1：允许|
+|systemreason|系统自动取消订单提示|string|Y|0:不允许 1：允许|
+
+***
+## 接口名称
+ *   用户发起的 同意取消订单接口
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/usercancelorderaccess?shopid=&channel=&orderid=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 同意用户发起的取消订单接口
+
+### 4) 请求参数:
+
+#### POST参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+|orderid||string|Y|订单编号|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
+
+***
+## 接口名称
+ *   用户发起的 拒绝取消订单接口
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/usercancelorderreject?shopid=&channel=&orderid=&reason=
+
+### 2) 调用方式：HTTP post
+
+### 3) 接口描述：
+
+* 拒绝用户发起的取消订单接口
+
+### 4) 请求参数:
+
+#### POST参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+|orderid||string|Y|订单编号|
+|reason||string|Y|拒绝的原因|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
 
