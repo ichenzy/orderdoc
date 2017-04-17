@@ -489,11 +489,13 @@
           "reasons":[
           	{
           		"reason":"用户申请取消订单",
-          		"datetime":"于2017-4-8 14:15"
+          		"datetime":"于2017-4-8 14:15",
+          		"note":"申请理由:商品损坏了"
           	},
           	{
           		"reason":"商家已同意取消订单",
-          		"datetime":"于2017-4-8 14:20"
+          		"datetime":"于2017-4-8 14:20",
+          		"note":"这笔钱会自动打给用户"
           	}
           ]
          "systemreason":"15：00内未处理，将自动取消订单"，
@@ -542,7 +544,7 @@
 |iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
 |reason|状态提示|string|Y|-|
 |datetime|状态变更时间|string|Y|0:不允许 1：允许|
-|systemreason|系统自动取消订单提示|string|Y|0:不允许 1：允许|
+|systemreason|系统自动取消订单时间提示|string|Y|0:不允许 1：允许|
 
 ***
 ## 接口名称
@@ -868,4 +870,128 @@
 ```
 
 ***
+
+
+
+***
+##  获取售后管理详情接口
+
+### 1) 请求地址
+
+>http://xloms.com/index.php/api/order/refunddetail?channel=&orderid=&shopid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 获取未处理、已处理的售后订单详情页面
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|channel|订单的渠道来源|Number|Y|0:全部 1:京东 2:美团 |
+|orderid|订单编号|String|Y|-|
+|shopid|店铺的编号|Number|Y|-|
+
+
+### 5) 请求返回结果:
+
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"ismodify":0,
+    	"modifystate":0,
+    	"ordernote":"多加辣椒",
+    	"iscancelorder":0,
+        "orderid": "2890380489499",
+        "ordernum": "#8",
+        "shoppaytotal": "¥23.4",
+        "channel": "9",
+        "channelname": "百度",
+        "state": "0",
+        "ordertime": "2017-02-20  16:35",
+        "subtotal": "¥26",
+        "systemreason":"15：00内未处理，将自动取消订单",
+        "refundgoodstotal":"36.0",
+        "rideritems": {
+            "ridername": "张三",
+            "ridermobile": "13587628612"
+        },
+        "reasons":[
+          	{
+          		"reason":"用户申请取消订单",
+          		"datetime":"于2017-4-8 14:15",
+          		"note":"申请理由:商品损坏了"
+          	},
+          	{
+          		"reason":"商家已同意取消订单",
+          		"datetime":"于2017-4-8 14:20",
+          		"note":"这笔钱会自动打给用户"
+          	}
+        ]
+        "customeritems": {
+            "customername": "张女士",
+            "customermobile": "138123456789",
+            "customeraddress": "大西洋新城A1011"
+        },
+        "refundgoodsitems": [
+            {
+                "goodsname": "伊利红枣酸牛奶450g"
+            }
+            {
+                "goodsname": "今时代木糖醇酸奶180g"
+            }
+        ]
+        "otherbilling": [
+            {
+                "key": "配送费",
+                "value": "¥10"
+            },
+            {
+                "key": "商家代金券",
+                "value": "- ¥5"
+            },
+            {
+                "key": "支付红包",
+                "value": "- ¥5"
+            },
+            {
+                "key": "平台服务费",
+                "value": "- ¥2.6"
+            }
+        ]
+    }
+}
+
+订单详情获取失败返回结果如下：
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "success": false,
+        "message": "订单详情获取失败"
+    }
+}
+```
+
+
+### 6) 请求返回结果参数说明新增）:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|ordernote|订单备注|string|Y|-|
+|iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
+|reason|状态提示|string|Y|-|
+|datetime|状态变更时间|string|Y|-|
+|systemreason|系统自动取消订单时间提示|string|-|
+|note|操作的原因|string|-|
+|refundgoodstotal|订单取消的金额|string|Y|-|
+|refundgoodsitems|申请退款的商品|string|Y|-|
+
+***
+
 
