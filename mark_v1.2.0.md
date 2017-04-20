@@ -193,7 +193,7 @@
 ```
 ***
 
-## 修改商品详情订单的商品数量
+## 修改订单详情订单的商品数量
 
 ### 1) 请求地址
 
@@ -213,16 +213,16 @@
 |shopid|店铺编号|string|Y| 店铺编号|
 |channel渠道编号|string|Y| 渠道编号|
 |orderid|订单编号|string|Y| 订单编号|
-|goods|修改的商品减的数量数组||Y|结构如下|
+|cgoodslist|修改后的商品数量数组||Y|结构如下|
 
 ```
 [
 	{
-		"goodid":"101001",
+		"cgoodsid":"101001",
 		"count":1
 	},
 	{
-		"goodid":"101002",
+		"cgoodsid":"101002",
 		"count":2
 	},
 ]
@@ -295,12 +295,14 @@
             {
                 "goodsname": "伊利红枣酸牛奶450g",
                 "goodscount": "1",
-                "goodsamount": "¥6.5"
+                "goodsamount": "¥6.5",
+                "cgoodsid": "100010"
             },
             {
                 "goodsname": "今时代木糖醇酸奶180g",
                 "goodscount": "1",
-                "goodsamount": "¥3"
+                "goodsamount": "¥3",
+                "cgoodsid": "100011"
             }
         ],
         "otherbilling": [
@@ -343,6 +345,7 @@
 |modifystate|修改订单的状态|string|Y|0：未修改 1：已经修改过|
 |ordernote|订单备注|string|Y|-|
 |iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
+|goodsid|商品的编号|string|Y|-|
 
 
 ***
@@ -543,8 +546,8 @@
 |ordernote|订单备注|string|Y|-|
 |iscancelorder|是否允许取消订单|string|Y|0:不允许 1：允许|
 |reason|状态提示|string|Y|-|
-|datetime|状态变更时间|string|Y|0:不允许 1：允许|
-|systemreason|系统自动取消订单时间提示|string|Y|0:不允许 1：允许|
+|datetime|状态变更时间|string|Y|-|
+|systemreason|系统自动取消订单时间提示|string|Y|-|
 
 ***
 ## 接口名称
@@ -993,5 +996,44 @@
 |refundgoodsitems|申请退款的商品|string|Y|-|
 
 ***
+
+***
+## 接口名称
+ *   商户发起的备货完成操作(目前只支持京东平台)
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/stockUpdone?shopid=&channel=&orderid=
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 商家接单后，理货完成，发起这个操作，配送员可以进行抢单了
+
+### 4) 请求参数:
+
+#### POST参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|shopid||string|Y|店铺id|
+|channel||string|Y|渠道编号|
+|orderid||string|Y|订单编号|
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+    	"message":"操作成功"
+    }
+}
+
+```
+
+***
+
 
 
