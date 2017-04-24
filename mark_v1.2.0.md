@@ -666,7 +666,7 @@
 
 ### 1) 请求地址
 
->http://oms.xianlife.com/api/store/goodstypelist?shopid=
+>http://oms.xianlife.com/api/store/goodstypelist?shopid=&catversion
 
 ### 2) 调用方式：HTTP get
 
@@ -679,7 +679,9 @@
 #### GET参数:
 |字段名称       |字段说明         |类型            |必填            |备注     |
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
-|shopid||string|Y|店铺id|
+|shopid|店铺id|string|Y|-|
+|catversion|配置版本号|string|Y|可以为空|
+
 
 ### 5) 请求返回结果:
 
@@ -1036,6 +1038,46 @@
 ```
 
 ***
+
+***
+## 接口名称
+ *  获取新订单数量
+
+### 1) 请求地址
+
+>http://oms.xianlife.com/api/order/order-count?channel=&shopid=&
+
+### 2) 调用方式：HTTP get
+
+### 3) 接口描述：
+
+* 获取新订单数量（更新）
+
+### 4) 请求参数:
+
+#### GET参数:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|channel|渠道编号|string|Y|-|
+|shopid|店铺编号|string|Y|-|
+
+
+### 5) 请求返回结果:
+
+```
+{
+    "success": true,
+    "returntype": 0,
+    "result": {
+        "ordernewcount":"1",
+        "catversion":"120"
+    }
+}
+```
+### 6) 请求返回结果参数说明（新增）:
+|字段名称       |字段说明         |类型            |必填            |备注     |
+| -------------|:--------------:|:--------------:|:--------------:| ------:|
+|catversion|商品分类的配置版本号|string|Y|-|
 
 
 
