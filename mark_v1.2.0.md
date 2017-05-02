@@ -791,7 +791,7 @@
 
 ### 1) 请求地址
 
->http://oms.xianlife.com/api/store/goodsstates?goodsid=
+>http://oms.xianlife.com/api/store/goodsstates?goodsid=&shopid=
 
 ### 2) 调用方式：HTTP get
 
@@ -805,6 +805,7 @@
 |字段名称       |字段说明         |类型            |必填            |备注     |
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
 |goodsid|商品的线下编号|string|Y|-|
+|shopid|商品的线下编号|string|Y|-|
 
 
 ### 5) 请求返回结果:
