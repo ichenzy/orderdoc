@@ -666,7 +666,7 @@
 
 ### 1) 请求地址
 
->http://oms.xianlife.com/api/store/goodstypelist?shopid=&catversion
+>http://oms.xianlife.com/api/store/goodstypelist?shopid=
 
 ### 2) 调用方式：HTTP get
 
