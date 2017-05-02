@@ -738,7 +738,7 @@
 
 ### 1) 请求地址
 
->http://oms.xianlife.com/api/store/goodslist?shopid=&parentid=&childid=
+>http://oms.xianlife.com/api/store/goods-list?shopid=&parentid=&childid=
 
 ### 2) 调用方式：HTTP get
 
@@ -804,7 +804,7 @@
 #### GET参数:
 |字段名称       |字段说明         |类型            |必填            |备注     |
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
-|goodsid||string|Y|商品的线下编号|
+|goodsid|商品的线下编号|string|Y|-|
 
 
 ### 5) 请求返回结果:
@@ -818,17 +818,20 @@
             {
                 "channel": "0",
                 "channelname": "美团",
-                "state": 0
+                "goodsstate": 0,
+                "cgoodsid":"10010"
             },
             {
                 "channel": "1",
                 "channelname": "京东",
-                "state": 0
+                "goodsstate": 0,
+                "cgoodsid":"10011"
             },
             {
                 "channel": "0",
                 "channelname": "饿了吗",
-                "state": 1
+                "goodsstate": 1,
+                "cgoodsid":"10011"
             }
         ]
     }
@@ -839,14 +842,15 @@
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
 |channel|渠道编号|string|Y|-|
 |channelname|渠道名称|string|Y|-|
-|state|商品的状态|string|Y|0:下架 1：上架|
+|goodsstate|商品的状态|string|Y|0:下架 1：上架|
+|cgoodsid|商品的线上所在渠道编号|string|Y|-|
 ***
 ## 接口名称
  *   修改商品的上下架信息
 
 ### 1) 请求地址
 
->http://oms.xianlife.com/api/store/modifygoodsstate?goodsid=&channels=&state=
+>http://oms.xianlife.com/api/store/modifygoodsstate?goodsinfo=
 
 ### 2) 调用方式：HTTP post
 
@@ -859,9 +863,30 @@
 #### POST参数:
 |字段名称       |字段说明         |类型            |必填            |备注     |
 | -------------|:--------------:|:--------------:|:--------------:| ------:|
-|goodsid||string|Y|商品的线下编号|
-|channels||string|Y|渠道编号数组|
-|state|商品的状态|string|Y|0:下架 1：上架|
+|goodsinfo||修改的商品的上下架信息数组|Y|上架操作时，只上传商品的所有上架的渠道数组，下架和上架处理一样，结构如下|
+
+```
+ "goodsinfo": [
+            {
+                "channel": "0",
+                "channelname": "美团",
+                "goodsstate": 1,
+                "cgoodsid":"10010"
+            },
+            {
+                "channel": "1",
+                "channelname": "京东",
+                "goodsstate": 1,
+                "cgoodsid":"10011"
+            },
+            {
+                "channel": "0",
+                "channelname": "饿了吗",
+                "goodsstate": 1,
+                "cgoodsid":"10011"
+            }
+        ]
+```
 
 ### 5) 请求返回结果:
 
